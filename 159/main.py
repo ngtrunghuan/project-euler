@@ -1,4 +1,9 @@
 import time
+import itertools
+from functools import reduce
+import operator
+
+from HashableList import HashableList
 # out = {}
 
 # for i in range (1, 1000000):
@@ -86,9 +91,27 @@ def factor_combinations(n):
   """
   if not isinstance(n, int):
     raise ValueError('Expected type {} but got {} instead.'.format(int, type(n)))
-  
+  if n == 0:
+    return set()
+    
   factors = factorise(n)
+  total_factors = sum(factors.values())
+  factors_array = list(itertools.chain.from_iterable([[key] * factors[key] for key in factors.keys()]))
 
+  # factors_array.append(1)
+  # print(factors_array)
+
+  # Product combinations should be unique
+  products_combinations = set()
+
+  for i in range(1, total_factors):
+    for combo in itertools.combinations(factors_array, i):
+      products = HashableList(combo)
+      products.append(int(n / reduce(operator.mul, products)))
+      products_combinations.add(products)
+  products_combinations.add(HashableList([1, n]))
+
+  return products_combinations
 
 def max_drs(n):
   """
@@ -97,13 +120,15 @@ def max_drs(n):
   pass
 
 if __name__ == "__main__":
-  start = time.clock()
+  start = time.perf_counter()
 
-  # factorsOfN = factorise(100)
-  # print(factorsOfN)
+  test = 1
+  factorsOfN = factorise(test)
+  print(factorsOfN)
+  print(factor_combinations(test))
 
   
 
-  end = time.clock()
+  end = time.perf_counter()
 
   print('--- Elapsed time: {:2f}s'.format(end - start))
