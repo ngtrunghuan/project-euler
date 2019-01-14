@@ -1,0 +1,3 @@
+Thoughts
+- Possibly a recursive problem with base cases
+  - E(L) = L with all L in [1, 2] and E(L) = 0 with all L in [0, 1)
