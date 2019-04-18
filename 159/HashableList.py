@@ -6,7 +6,11 @@ class HashableList(list):
     d = dict(counter)
     # arr = [(key, d[key] for key in sorted]
     keystring = ';'.join(['{}:{}'.format(key, d[key]) for key in sorted(d.keys())])
+    # print(keystring)
     return hash(keystring)
+
+  def __eq__(self, other):
+    return self.__hash__() == other.__hash__()
 
 if __name__ == "__main__":
   a = HashableList([2, 2, 2, 5, 5, 5])

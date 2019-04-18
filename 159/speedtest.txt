@@ -1,0 +1,10 @@
+--- factorise() ---
+Speedtest for 100: 0.000192s
+Speedtest for 1000: 0.002369s
+Speedtest for 10000: 0.031476s
+Speedtest for 100000: 0.372868s
+
+--- calculateMaxDrs() ---
+Speedtest for 100: 0.035147s
+Speedtest for 1000: 1.731832s
+Speedtest for 10000: 74.414518s
